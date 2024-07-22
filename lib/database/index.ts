@@ -22,7 +22,7 @@ export const connectToDatabase = async () => {
   cached.promise =
     cached.promise ||
     mongoose.connect(MONGODB_URL, {
-      dbName: 'clerk-next14-db',
+      dbName: 'accelevents',
       bufferCommands: false,
       connectTimeoutMS: 30000,
     });
