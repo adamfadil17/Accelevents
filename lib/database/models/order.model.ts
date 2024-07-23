@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import { Schema, model, models, Document } from 'mongoose';
 
-export interface IOrder extends mongoose.Document {
+export interface IOrder extends Document {
   createdAt: Date;
   stripeId: string;
   totalAmount: string;
@@ -24,7 +24,7 @@ export type IOrderItem = {
   buyer: string;
 };
 
-const OrderSchema = new mongoose.Schema({
+const OrderSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
@@ -38,15 +38,15 @@ const OrderSchema = new mongoose.Schema({
     type: String,
   },
   event: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Event',
   },
   buyer: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
   },
 });
 
-const Order = mongoose.models.Order || mongoose.model('Order', OrderSchema);
+const Order = models.Order || model('Order', OrderSchema);
 
 export default Order;
