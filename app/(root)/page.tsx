@@ -1,11 +1,17 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { currentUser } from '@clerk/nextjs/server';
+import Collection from '@/components/shared/Collection';
+import { getAllEvents } from '@/lib/actions/event.actions';
 
 export default async function Home() {
-  // const user = await currentUser();
-  // if (!user) return null;
+  const events = await getAllEvents({
+    query: '',
+    category: '',
+    page: 1,
+    limit: 6,
+  });
+
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10/">
@@ -43,9 +49,17 @@ export default async function Home() {
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
           Search CategoryFilter
-          {/* <h1>{user.firstName}</h1>
-          <h1>{user.lastName}</h1> */}
         </div>
+
+        <Collection
+          data={events?.data}
+          emptyTitle="No Events Found"
+          emptyStateSubtext="Comeback later"
+          collectionType="All_Events"
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
       </section>
     </>
   );

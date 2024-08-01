@@ -228,6 +228,22 @@ body {
   .toggle-switch {
     @apply bg-gray-300 !important;
   }
+
+  .tooltip {
+    @apply relative z-50 inline-block cursor-pointer;
+  }
+
+  .tooltip .tooltiptext {
+    @apply hidden w-40 bg-gray-700 text-white text-center rounded-lg p-2 absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 -mb-2 opacity-0 transition-opacity duration-300;
+  }
+
+  .tooltip .tooltiptext::after {
+    @apply content-[''] absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-700;
+  }
+
+  .tooltip:hover .tooltiptext {
+    @apply block opacity-100;
+  }
 }
 
 /* ========================================== CLERK STYLES */
